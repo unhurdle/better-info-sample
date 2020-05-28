@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<js:View xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:js="library://ns.apache.org/royale/basic"
+	xmlns:comp="com.unhurdle.view.components.*" 
+			  width="100%" height="100%"
+			  initComplete="init()">
+	<fx:Script>
+		<![CDATA[
+			import com.adobe.cep.CSInterface;
+			import com.unhurdle.utils.JSXInterface;
+			import com.unhurdle.cep.events.UnhurdleEvent;
+			
+			private var jsxInterface:JSXInterface;
+
+			private function init():void{
+				jsxInterface = JSXInterface.getInstance();
+				updatePanel();
+				CSInterface.addEventListener("applicationActivate",updatePanel);
+				CSInterface.addEventListener("documentAfterActivate",updatePanel);
+				CSInterface.addEventListener(UnhurdleEvent.AFTER_SELECTION_CHANGED,updatePanel);
+
+			}
+			private function updatePanel(ev:* = null):void{
+				var promises:Array = [
+					jsxInterface.getAltText(),
+					jsxInterface.getLabel(),
+					jsxInterface.getCharStyle(),
+					jsxInterface.getParaStyle(),
+					jsxInterface.getImageScaleX(),
+					jsxInterface.getImageScaleY(),
+					jsxInterface.getEffectivePpi(),
+					jsxInterface.getFileName(),
+					jsxInterface.getNumItems()
+
+				];
+				Promise.all(promises).then(function(result:Array):*{
+					console.log(result);
+					if(result && result.length){
+						alternate.text = result[0];
+						scriptLabel.text = result[1];
+						charStyle.text = result[2];
+						paraStyle.text = result[3];
+						imageScaleX.text = result[4];
+						imageScaleY.text = result[5];
+						effectivePpi.text = result[6];
+						fileName.text = result[7];
+						numItems.text = result[8];
+
+					}
+
+				}).catch(function(result:*):*{console.log(result)});
+			}
+			private function changeAlternate():void{
+				jsxInterface.setAltText(alternate.text);
+			}
+
+		]]>
+	</fx:Script>
+    <js:states>
+        <js:State name="textSelectState" />
+		<js:State name="imageSelectState" />
+		<js:State name="shapeSelectState" />
+        <js:State name="nothingSelectState" />
+    </js:states>
+	<js:beads>
+		<js:ViewDataBinding/>
+	</js:beads>
+	<js:style>
+		<js:SimpleCSSStyles  />
+	</js:style>
+		<js:VContainer width="100%" height="100%" >
+		<js:style>
+			<js:SimpleCSSStyles paddingLeft="10" paddingRight="10"/>
+		</js:style>
+		<js:Spacer height="5"/>
+		<js:HContainer>
+			<js:Label className="align-right" text="Items Selected:"/>
+			<js:Spacer width="10"/>
+			<js:Label id="numItems"/>
+		</js:HContainer>
+		<js:Spacer height="5"/>
+		<js:HContainer>
+			<js:Label className="align-right" text="Script Label:"/>
+			<js:Spacer width="10"/>
+			<js:TextInput id="scriptLabel"/>
+		</js:HContainer>
+		<js:Spacer height="5"/>
+		<js:HContainer>
+			<js:Label className="align-right" text="Alt Text:"/>
+			<js:Spacer width="10"/>
+			<js:TextInput id="alternate" change="changeAlternate()"/>
+		</js:HContainer>
+		<js:Spacer height="5"/>
+		<js:HContainer>
+			<js:Label className="align-right" text="Link File Name:"/>
+			<js:Spacer width="10"/>
+			<js:Label id="fileName" />
+		</js:HContainer>
+		<js:Spacer height="5"/>
+		<js:HContainer>
+			<js:Label className="align-right" text="Effective Ppi:"/>
+			<js:Spacer width="10"/>
+			<js:Label id="effectivePpi" />
+		</js:HContainer>
+		<js:Spacer height="5"/>
+		<js:HContainer>
+			<js:Label className="align-right" text="Image Scale X:"/>
+			<js:Spacer width="10"/>
+			<js:Label id="imageScaleX" />
+		</js:HContainer>
+		<js:Spacer height="5"/>
+		<js:HContainer>
+			<js:Label className="align-right" text="Image Scale Y:"/>
+			<js:Spacer width="10"/>
+			<js:Label id="imageScaleY" />
+		</js:HContainer>
+		<js:Spacer height="5"/>
+		<js:HContainer>
+			<js:Label className="align-right" text="Character Style:"/>
+			<js:Spacer width="10"/>
+			<js:Label id="charStyle" />
+		</js:HContainer>
+		<js:Spacer height="5"/>
+		<js:HContainer>
+			<js:Label className="align-right" text="Paragraph Style:"/>
+			<js:Spacer width="10"/>
+			<js:Label id="paraStyle" />
+		</js:HContainer>
+	</js:VContainer>
+</js:View>

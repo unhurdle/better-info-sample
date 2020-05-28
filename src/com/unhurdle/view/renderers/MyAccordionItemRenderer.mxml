@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<js:AccordionItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009"
+                     xmlns:js="library://ns.apache.org/flexjs/basic" className="panel_panel">
+
+	<fx:Style>
+		@namespace js "library://ns.apache.org/flexjs/basic";
+		
+		js|TitleBar
+		{
+			IBeadView: ClassReference("com.unhurdle.view.AccordionTitleBarView");
+			IBeadLayout: ClassReference("org.apache.flex.html.beads.layouts.BasicLayout");
+			border-style: none;
+			background-color: transparent;
+			border-width: 0;
+			left: 0;
+			top: 0;
+		}
+		
+	</fx:Style>
+	<fx:Script>
+		<![CDATA[
+			import org.apache.flex.core.IBeadView;
+			import org.apache.flex.core.IStatesObject;
+			override public function set hovered(value:Boolean):void
+			{
+				super.hovered = value;
+				updateState();
+			}
+			
+			override public function set selected(value:Boolean):void
+			{
+				super.selected = value;
+				updateState();
+			}
+			
+			private function updateState():void
+			{
+				var stateValue:String = selected ? "open" : "closed";
+				if (hovered)
+				{
+					stateValue += "_over";
+				}
+				(titleBarView as IStatesObject).currentState = stateValue;
+				// trace("id: " + id +  " stateValue: " + stateValue);
+			}
+			
+			private function get titleBarView():IBeadView
+			{
+				return titleBar.getBeadByType(IBeadView) as IBeadView;
+			}
+			
+		]]>
+	</fx:Script>
+
+</js:AccordionItemRenderer>

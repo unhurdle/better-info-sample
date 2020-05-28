@@ -1,0 +1,17 @@
+/* Put any css that you don't want compiled into this file */
+.spectrum--dark .ToolTip {
+    color: rgb(227, 227, 227);
+    background-color: rgb(84, 84, 84);
+}
+.spectrum--darkest .ToolTip {
+    color: rgb(200, 200, 200);
+    background-color: rgb(53, 53, 53);
+}
+.spectrum--light .ToolTip {
+    color: rgb(75, 75, 75);
+    background-color: rgb(184, 184, 184);
+}
+.spectrum--lightest .ToolTip {
+    color: rgb(80, 80, 80);
+    background-color: rgb(240, 240, 240);
+}

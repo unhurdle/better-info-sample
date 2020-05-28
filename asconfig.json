@@ -1,0 +1,27 @@
+{
+    "config": "royale",
+    "compilerOptions": {
+        "debug": false,
+        "targets": ["JSRoyale"],
+        "source-map": false,
+        "js-library-path": [
+            "lib"
+        ],
+        "js-external-library-path": [
+            "typedefs"
+        ],
+        "remove-circulars": true,
+        "warn-public-vars": false,
+        "html-template": "index-template.html",
+        "js-compiler-option": [
+            "--skip_type_inference"
+        ]
+    },
+    
+    "additionalOptions": "-js-output-optimization=skipAsCoercions -js-dynamic-access-unknown-members=true -allow-private-constructors=true -js-complex-implicit-coercions=false -js-vector-index-checks=false",
+    "copySourcePathAssets": true,
+    "files":
+    [
+        "src/BetterInfo.mxml"
+    ]
+}

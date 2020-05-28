@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<sp:Application
+	xmlns:js="library://ns.apache.org/royale/basic"
+	xmlns:fx="http://ns.adobe.com/mxml/2009"
+	xmlns:sp="library://ns.unhurdle.com/spectrum"
+	xmlns:view="com.unhurdle.view.*" 
+	xmlns:utils="com.unhurdle.utils.*"
+	initialize="init()">
+	<fx:Script>
+		<![CDATA[			
+			import com.unhurdle.utils.JSXInterface;
+			import com.unhurdle.cep.ThemeManager;
+			import com.unhurdle.cep.events.IDScriptingEventAdapter;
+			import com.unhurdle.cep.events.UnhurdleEvent;
+
+			private var jsxInterface:JSXInterface;
+			
+			private function updateThemeOverrides(ev:Event):void{
+				ThemeManager.instance.addRuleOverride(".panel_panel","background-color:"+ ThemeManager.instance.backgroundColor);
+			}
+			private function init():void{
+				ThemeManager.instance.addEventListener(ThemeManager.THEME_CHANGED,updateThemeOverrides);
+				ThemeManager.instance.init();
+				console.log("post theme init");
+				jsxInterface = JSXInterface.getInstance();
+				console.log(jsxInterface);
+				var promises:Array = [jsxInterface.init(),jsxInterface.getSysInfo()];
+				Promise.all(promises)
+				.then(postInit)
+				.catch(function(result:*):*{
+				console.log(result);
+					//do something with the error...
+				});
+			}
+			private function postInit():void{
+				IDScriptingEventAdapter.registerEvent(UnhurdleEvent.AFTER_SELECTION_CHANGED);
+				console.log("post init");
+			}
+
+		]]>
+	</fx:Script>
+		<fx:Style>
+		@namespace ns "library://ns.apache.org/flexjs/svg";
+		@namespace js "library://ns.apache.org/flexjs/basic";
+		
+		js|TextButton
+		{
+			/*padding-top:10px;*/
+		}
+		js|Container
+		{
+			border-style: none;
+		}
+		js|TextButton:focus {
+  			outline: none;
+		}
+		.topcoat-checkbox__checkmark{
+			margin-right: 3px;
+		}
+		.align-right{
+			text-align: right;
+		}
+	</fx:Style>
+	<sp:beads>
+		<js:BrowserResizeHandler/>
+		<js:ApplicationDataBinding/>
+	</sp:beads>
+	<sp:valuesImpl>
+		<js:SimpleCSSValuesImpl />
+	</sp:valuesImpl>
+	<sp:initialView>
+		<view:PanelView/>
+	</sp:initialView>
+</sp:Application>
