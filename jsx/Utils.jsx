@@ -1,24 +1,24 @@
 gIsMac = File.fs == "Macintosh";
 kAppVersion = parseFloat(app.version);
 
-if(typeof(com_unhurdl_utils)=='undefined'){
-	com_unhurdl_utils = {};
+if(typeof(com_unhurdle_utils)=='undefined'){
+	com_unhurdle_utils = {};
 }
 
-com_unhurdl_utils.GetFileSystem = function(){
+com_unhurdle_utils.GetFileSystem = function(){
 	return File.fs;
 }
-com_unhurdl_utils.GetNativePath = function(uri){
+com_unhurdle_utils.GetNativePath = function(uri){
 	
 	try{
-		var file = com_unhurdl_utils.NewFile(uri);
+		var file = com_unhurdle_utils.NewFile(uri);
 		if(gIsMac){return file.absoluteURI}
 		return file.fsName;
 	}catch(err){
 		return "";
 	}
 }
-com_unhurdl_utils.GetFile = function(title,filter) {
+com_unhurdle_utils.GetFile = function(title,filter) {
 	var fileName = "";
 	if(filter){
 		// Not sure if we need to do something
@@ -27,7 +27,7 @@ com_unhurdl_utils.GetFile = function(title,filter) {
 	}
 	var file = File.openDialog(title,filter);
 	if(file){
-		return com_unhurdl_utils.NewFile(file).fsName;
+		return com_unhurdle_utils.NewFile(file).fsName;
 		// if(gIsMac){
 		// 	fileName = file.absoluteURI;
 		// } else {
@@ -36,7 +36,7 @@ com_unhurdl_utils.GetFile = function(title,filter) {
 	}
 	return fileName;
 }
-com_unhurdl_utils.GetFolder = function(title,sourceFolder){
+com_unhurdle_utils.GetFolder = function(title,sourceFolder){
 	if(sourceFolder){
 		try{
 			var folder = Folder(sourceFolder).selectDlg(title);
@@ -47,7 +47,7 @@ com_unhurdl_utils.GetFolder = function(title,sourceFolder){
 		var folder = Folder.selectDialog(title);
 	}
 	if(folder){
-		return com_unhurdl_utils.NewFolder(folder).fsName;
+		return com_unhurdle_utils.NewFolder(folder).fsName;
 		// if(gIsMac){
 		// 	folderName = folder.absoluteURI;
 		// } else {
@@ -56,7 +56,7 @@ com_unhurdl_utils.GetFolder = function(title,sourceFolder){
 	}
 	return folderName;
 }
-com_unhurdl_utils.GetSaveFile = function(title){
+com_unhurdle_utils.GetSaveFile = function(title){
 	var fileName = "";
 	var file = File.saveDialog(title);
 	if(file){
@@ -69,16 +69,16 @@ com_unhurdl_utils.GetSaveFile = function(title){
 	return fileName;
 
 }
-com_unhurdl_utils.GetPluginDataFolder = function(endPath){
+com_unhurdle_utils.GetPluginDataFolder = function(endPath){
 	var userData = Folder.userData;
-	userData = com_unhurdl_utils.NewFolder(userData);
+	userData = com_unhurdle_utils.NewFolder(userData);
 	return userData + "/" + endPath;
 }
 
 
-com_unhurdl_utils.GetTempFolder = function(){
+com_unhurdle_utils.GetTempFolder = function(){
 	var temp = Folder.temp;
-	temp = com_unhurdl_utils.NewFolder(temp);
+	temp = com_unhurdle_utils.NewFolder(temp);
 	if(gIsMac){
 		return temp.absoluteURI;
 	} else {
@@ -93,7 +93,7 @@ com_unhurdl_utils.GetTempFolder = function(){
 
 
 
-com_unhurdl_utils.NewFile = function(inPath){
+com_unhurdle_utils.NewFile = function(inPath){
   var file;
   try{
     do{
@@ -116,7 +116,7 @@ com_unhurdl_utils.NewFile = function(inPath){
         break;
       }
       var rootVolumeName = File("/").parent.displayName;
-      var rootName = com_unhurdl_utils.GetRootName(file);
+      var rootName = com_unhurdle_utils.GetRootName(file);
       if(rootName && rootName != rootVolumeName){
       	break;
       }
@@ -130,7 +130,7 @@ com_unhurdl_utils.NewFile = function(inPath){
   return file;
 }
  
-com_unhurdl_utils.NewFolder = function(inPath){
+com_unhurdle_utils.NewFolder = function(inPath){
   var folder;
   try{
     do{
@@ -156,7 +156,7 @@ com_unhurdl_utils.NewFolder = function(inPath){
         break;
       }     
       var rootVolumeName = File("/").parent.displayName;
-      var rootName = com_unhurdl_utils.GetRootName(folder);
+      var rootName = com_unhurdle_utils.GetRootName(folder);
       if(rootName && rootName != rootVolumeName){
       	break;
       }
@@ -169,7 +169,7 @@ com_unhurdl_utils.NewFolder = function(inPath){
   }
   return folder;
 }
-com_unhurdl_utils.GetRootName = function(folder){
+com_unhurdle_utils.GetRootName = function(folder){
 	var rootName = folder.name;
 	while(folder){
 		if(folder.name != "Volumes" && folder.name){
@@ -182,11 +182,11 @@ com_unhurdl_utils.GetRootName = function(folder){
 	}
 	return rootName;
 }
-com_unhurdl_utils.NormalizeFilePath = function(file){
+com_unhurdle_utils.NormalizeFilePath = function(file){
 	if(File.fs != "Macintosh"){return file}
 	return File(file.fsName.replace(/^\/Volumes/,"/" + File("///").parent.displayName));
 }
-com_unhurdl_utils.RemoveVolumePath = function(path){
+com_unhurdle_utils.RemoveVolumePath = function(path){
 	if(File.fs != "Macintosh"){
 		return path;
 	}
@@ -197,47 +197,47 @@ com_unhurdl_utils.RemoveVolumePath = function(path){
 	return path
 }
 
-com_unhurdl_utils.ToHex = function(d) {
+com_unhurdle_utils.ToHex = function(d) {
     var r = d % 16;
     var result;
     if (d-r == 0) 
-        result = com_unhurdl_utils.toChar(r);
+        result = com_unhurdle_utils.toChar(r);
     else 
-        result = com_unhurdl_utils.ToHex( (d-r)/16 ) + com_unhurdl_utils.toChar(r);
+        result = com_unhurdle_utils.ToHex( (d-r)/16 ) + com_unhurdle_utils.toChar(r);
     return result;
 }
-com_unhurdl_utils.toChar = function(n) {
+com_unhurdle_utils.toChar = function(n) {
     const alpha = "0123456789abcdef";
     return alpha.charAt(n);
 };
-com_unhurdl_utils.getSysInfo = function(){
+com_unhurdle_utils.getSysInfo = function(){
 	var info = {
-		appData : com_unhurdl_utils.NewFolder(Folder.appData).fsName,
-		appPackage : com_unhurdl_utils.NewFolder(Folder.appPackage).fsName,
-		commonFiles : com_unhurdl_utils.NewFolder(Folder.commonFiles).fsName,
-		current : com_unhurdl_utils.NewFolder(Folder.current).fsName,
-		desktop : com_unhurdl_utils.NewFolder(Folder.desktop).fsName,
+		appData : com_unhurdle_utils.NewFolder(Folder.appData).fsName,
+		appPackage : com_unhurdle_utils.NewFolder(Folder.appPackage).fsName,
+		commonFiles : com_unhurdle_utils.NewFolder(Folder.commonFiles).fsName,
+		current : com_unhurdle_utils.NewFolder(Folder.current).fsName,
+		desktop : com_unhurdle_utils.NewFolder(Folder.desktop).fsName,
 		fs : Folder.fs,
-		myDocuments : com_unhurdl_utils.NewFolder(Folder.myDocuments).fsName,
-		startup : com_unhurdl_utils.NewFolder(Folder.startup).fsName,
-		system : com_unhurdl_utils.NewFolder(Folder.system).fsName,
-		temp : com_unhurdl_utils.NewFolder(Folder.temp).fsName,
-		trash : com_unhurdl_utils.NewFolder(Folder.trash).fsName,
-		userData : com_unhurdl_utils.NewFolder(Folder.userData).fsName,
+		myDocuments : com_unhurdle_utils.NewFolder(Folder.myDocuments).fsName,
+		startup : com_unhurdle_utils.NewFolder(Folder.startup).fsName,
+		system : com_unhurdle_utils.NewFolder(Folder.system).fsName,
+		temp : com_unhurdle_utils.NewFolder(Folder.temp).fsName,
+		trash : com_unhurdle_utils.NewFolder(Folder.trash).fsName,
+		userData : com_unhurdle_utils.NewFolder(Folder.userData).fsName,
 		os : $.os,
 		engineVersion : $.version,
 		engineName : $.engineName,
 		locale : $.locale,
-		userFolder : com_unhurdl_utils.NewFolder(File("~")).fsName,
-		pluginsFolder : com_unhurdl_utils.getPlugInsFolder(),
-		scriptsFolder : com_unhurdl_utils.getScriptFolder()
+		userFolder : com_unhurdle_utils.NewFolder(File("~")).fsName,
+		pluginsFolder : com_unhurdle_utils.getPlugInsFolder(),
+		scriptsFolder : com_unhurdle_utils.getScriptFolder()
 	};
 	return JSON.stringify(info);
 }
-com_unhurdl_utils.haveOpenDocument = function(){
+com_unhurdle_utils.haveOpenDocument = function(){
 	return app.documents.length > 0 ? "true" : "false";
 }
-com_unhurdl_utils.getPlugInsFolder = function(){
+com_unhurdle_utils.getPlugInsFolder = function(){
 	var pluginsFolder = null;
 	do{
 	//
@@ -262,7 +262,7 @@ com_unhurdl_utils.getPlugInsFolder = function(){
 	}
 	return "";
 }
-com_unhurdl_utils.getScriptFolder = function(){
+com_unhurdle_utils.getScriptFolder = function(){
 	var scriptsFolder = null;
 	do{
 	//
@@ -286,4 +286,29 @@ com_unhurdl_utils.getScriptFolder = function(){
 		return scriptsFolder.fsName;
 	}
 	return "";
+}
+com_unhurdle_utils.RegisterEvent = function(event){
+	
+	var eventType = event.substr(event.lastIndexOf(".")+1);
+	var checkEvent = '#targetengine "com.unhurdle";\n' +
+		'this["com.unhurdle.event.' + eventType + '"]';
+	var eventLoaded = app.doScript(checkEvent);
+	if(eventLoaded){
+		return "";
+	}
+
+	var scriptStr = '#targetengine "com.unhurdle";\n' +
+		'app.addEventListener("' + eventType + '",dispatchChange);\n' +
+		'function dispatchChange(){\n' +
+		'new ExternalObject( "lib:PlugPlugExternalObject");\n' +
+		'var eventObj = new CSXSEvent();\n' +
+		'eventObj.type = "' + event + '";\n' +
+		'eventObj.dispatch();\n' +
+		'}\n' +
+		'this["com.unhurdle.event.' + eventType +'"] = true;';
+	app.doScript(scriptStr);
+
+	return "";
+
+
 }

@@ -9,18 +9,18 @@
 	<fx:Script>
 		<![CDATA[			
 			import com.unhurdle.utils.JSXInterface;
-			import com.unhurdle.cep.ThemeManager;
+			// import com.unhurdle.cep.ThemeManager;
 			import com.unhurdle.cep.events.IDScriptingEventAdapter;
 			import com.unhurdle.cep.events.UnhurdleEvent;
 
 			private var jsxInterface:JSXInterface;
 			
-			private function updateThemeOverrides(ev:Event):void{
-				ThemeManager.instance.addRuleOverride(".panel_panel","background-color:"+ ThemeManager.instance.backgroundColor);
-			}
+			// private function updateThemeOverrides(ev:Event):void{
+			// 	// ThemeManager.instance.addRuleOverride(".panel_panel","background-color:"+ ThemeManager.instance.backgroundColor);
+			// }
 			private function init():void{
-				ThemeManager.instance.addEventListener(ThemeManager.THEME_CHANGED,updateThemeOverrides);
-				ThemeManager.instance.init();
+				// ThemeManager.instance.addEventListener(ThemeManager.THEME_CHANGED,updateThemeOverrides);
+				// ThemeManager.instance.init();
 				console.log("post theme init");
 				jsxInterface = JSXInterface.getInstance();
 				console.log(jsxInterface);
@@ -40,8 +40,8 @@
 		]]>
 	</fx:Script>
 		<fx:Style>
-		@namespace ns "library://ns.apache.org/flexjs/svg";
-		@namespace js "library://ns.apache.org/flexjs/basic";
+		@namespace ns "library://ns.apache.org/royale/svg";
+		@namespace js "library://ns.apache.org/royale/basic";
 		
 		js|TextButton
 		{
