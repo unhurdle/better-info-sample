@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<js:View xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:js="library://ns.apache.org/royale/basic"
-	xmlns:comp="com.unhurdle.view.components.*"
-			  width="100%" height="100%"
-			  initComplete="init()">
+<sp:View xmlns:fx="http://ns.adobe.com/mxml/2009"
+				 xmlns:js="library://ns.apache.org/royale/basic"
+				 xmlns:comp="com.unhurdle.view.components.*"
+				 xmlns:sp="library://ns.unhurdle.com/spectrum"
+				 width="100%" height="100%"
+				 initComplete="init()">
 	<fx:Script>
 		<![CDATA[
 			import com.adobe.cep.CSInterface;
@@ -55,75 +57,66 @@
 
 		]]>
 	</fx:Script>
-    <js:states>
-        <js:State name="textSelectState" />
-		<js:State name="imageSelectState" />
-		<js:State name="shapeSelectState" />
-        <js:State name="nothingSelectState" />
-    </js:states>
-	<js:beads>
+		<sp:states>
+			<js:State name="textSelectState" />
+			<js:State name="imageSelectState" />
+			<js:State name="shapeSelectState" />
+			<js:State name="nothingSelectState" />
+		</sp:states>
+	<sp:beads>
 		<js:ViewDataBinding/>
-	</js:beads>
-	<js:style>
-		<js:AllCSSStyles  />
-	</js:style>
-		<js:VContainer width="100%" height="100%" >
-		<js:style>
-			<js:SimpleCSSStyles paddingLeft="10" paddingRight="10"/>
-		</js:style>
-		<js:Spacer height="5"/>
-		<js:HContainer>
-			<js:Label className="align-right" text="Items Selected:"/>
-			<js:Spacer width="10"/>
-			<js:Label id="numItems"/>
-		</js:HContainer>
-		<js:Spacer height="5"/>
-		<js:HContainer>
-			<js:Label className="align-right" text="Script Label:"/>
-			<js:Spacer width="10"/>
-			<js:TextInput id="scriptLabel"/>
-		</js:HContainer>
-		<js:Spacer height="5"/>
-		<js:HContainer>
-			<js:Label className="align-right" text="Alt Text:"/>
-			<js:Spacer width="10"/>
-			<js:TextInput id="alternate" change="changeAlternate()"/>
-		</js:HContainer>
-		<js:Spacer height="5"/>
-		<js:HContainer>
-			<js:Label className="align-right" text="Link File Name:"/>
-			<js:Spacer width="10"/>
-			<js:Label id="fileName" />
-		</js:HContainer>
-		<js:Spacer height="5"/>
-		<js:HContainer>
-			<js:Label className="align-right" text="Effective Ppi:"/>
-			<js:Spacer width="10"/>
-			<js:Label id="effectivePpi" />
-		</js:HContainer>
-		<js:Spacer height="5"/>
-		<js:HContainer>
-			<js:Label className="align-right" text="Image Scale X:"/>
-			<js:Spacer width="10"/>
-			<js:Label id="imageScaleX" />
-		</js:HContainer>
-		<js:Spacer height="5"/>
-		<js:HContainer>
-			<js:Label className="align-right" text="Image Scale Y:"/>
-			<js:Spacer width="10"/>
-			<js:Label id="imageScaleY" />
-		</js:HContainer>
-		<js:Spacer height="5"/>
-		<js:HContainer>
-			<js:Label className="align-right" text="Character Style:"/>
-			<js:Spacer width="10"/>
-			<js:Label id="charStyle" />
-		</js:HContainer>
-		<js:Spacer height="5"/>
-		<js:HContainer>
-			<js:Label className="align-right" text="Paragraph Style:"/>
-			<js:Spacer width="10"/>
-			<js:Label id="paraStyle" />
-		</js:HContainer>
-	</js:VContainer>
-</js:View>
+	</sp:beads>
+	<sp:style>
+		<js:AllCSSStyles	/>
+	</sp:style>
+		<sp:FlexContainer vertical="true" width="100%" height="100%">
+		<sp:style>
+			<js:AllCSSStyles paddingLeft="10", paddingRight="10"/>
+		</sp:style>
+			<sp:FieldGroup vertical="false">
+				<sp:Body size="5" text="Items Selected: "/>
+				<js:Spacer width="5"/>
+				<sp:Body size="5" id="numItems"/>
+			</sp:FieldGroup>
+			<js:Spacer height="5"/>
+			<sp:FieldGroup>
+				<sp:FieldLabel position="right" text="Script Label:" width="80"/>
+				<sp:TextField id="scriptLabel" flexGrow="1"/>
+			</sp:FieldGroup>
+			<sp:FieldGroup>
+				<sp:FieldLabel position="right" text="Alt Text:" width="80"/>
+				<sp:TextField id="alternate" change="changeAlternate()" flexGrow="1"/>
+			</sp:FieldGroup>
+			<sp:FieldGroup>
+				<sp:Body size="5" text="Link File Name:"/>
+				<js:Spacer width="5"/>
+				<sp:Body size="5" id="fileName"/>
+			</sp:FieldGroup>
+			<sp:FieldGroup>
+				<sp:Body size="5" text="Effective Ppi:"/>
+				<js:Spacer width="5"/>
+				<sp:Body size="5" id="effectivePpi"/>
+			</sp:FieldGroup>
+			<sp:FieldGroup>
+				<sp:Body size="5" text="Image Scale X:"/>
+				<js:Spacer width="5"/>
+				<sp:Body size="5" id="imageScaleX"/>
+			</sp:FieldGroup>
+			<sp:FieldGroup>
+				<sp:Body size="5" text="Image Scale Y:"/>
+				<js:Spacer width="5"/>
+				<sp:Body size="5" id="imageScaleY"/>
+			</sp:FieldGroup>
+			<sp:FieldGroup>
+				<sp:Body size="5" text="Character Style:"/>
+				<js:Spacer width="5"/>
+				<sp:Body size="5" id="charStyle"/>
+			</sp:FieldGroup>
+			<sp:FieldGroup>
+				<sp:Body size="5" text="Paragraph Style:"/>
+				<js:Spacer width="5"/>
+				<sp:Body size="5" id="paraStyle"/>
+			</sp:FieldGroup>
+			
+		</sp:FlexContainer>
+</sp:View>

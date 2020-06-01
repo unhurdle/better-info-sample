@@ -5,7 +5,7 @@
 		<![CDATA[Harbs]]>
 	</Author>
 	<ExtensionList>
-		 <Extension Id="com.unhurdle.labs.betterinfo" Version="0.0.1" /> 
+		 <Extension Id="com.unhurdle.betterinfo" Version="0.0.1" /> 
 	</ExtensionList>
 	<ExecutionEnvironment>
 		<HostList>
@@ -19,7 +19,7 @@
 		</RequiredRuntimeList>
 	</ExecutionEnvironment>
 	<DispatchInfoList>
- 		<Extension Id="com.unhurdle.labs.betterinfo">
+ 		<Extension Id="com.unhurdle.betterinfo">
 			<DispatchInfo >
 				<Resources>
 					<MainPath>./app/index.html</MainPath>
