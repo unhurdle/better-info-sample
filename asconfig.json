@@ -8,7 +8,8 @@
             "lib"
         ],
         "js-external-library-path": [
-            "typedefs"
+            "typedefs",
+            "${royalelib}/../js/libs/node.swc"
         ],
         "remove-circulars": true,
         "warn-public-vars": false,
