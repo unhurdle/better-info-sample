@@ -1,7 +1,6 @@
 {
     "config": "royale",
     "compilerOptions": {
-        "debug": false,
         "targets": ["JSRoyale"],
         "source-map": false,
         "js-library-path": [

@@ -4,6 +4,7 @@
 #cd `dirname $0`
 #echo `dirname $0`
 EXTENSION="BetterInfo"
+TARGET_DIRECTORY="/Users/harbs/Desktop"
 rm -rf app
 
 rsync -zarv --include="*/" --include="*.js" --include="*.css" --include="*.png" --include="*.map" --exclude="*" bin/js-release/ app
